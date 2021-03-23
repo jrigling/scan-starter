@@ -135,6 +135,12 @@ func main() {
 	// 	}
 	// }
 
+	err = dev.Grab()
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+	
 	fmt.Printf("Listening for events ...\n")
 
 	for {
