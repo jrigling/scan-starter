@@ -94,6 +94,31 @@ func format_event(ev *evdev.InputEvent) string {
 	return res
 }
 
+func processStroke(ev *evdev.InputEvent)  {
+	var res string
+	
+	code := int(ev.Code)
+
+	if ev.Type == evdev.EV_KEY && ev.Value == 1 {
+
+		switch code {
+		case evdev.KEY_KP1:
+			res = "pressed KEY_KP1"
+		case evdev.KEY_KP2:
+			res = "pressed KEY_KP2"
+		case evdev.KEY_KP3:
+			res = "pressed KEY_KP3"
+		case evdev.KEY_KP4:
+			res = "pressed KEY_KP4"
+		default:
+			res = "pressed some other key"
+		}
+		fmt.Println(res)
+	}
+
+}
+
+
 func main() {
 	var dev *evdev.InputDevice
 	var events []evdev.InputEvent
@@ -150,8 +175,8 @@ func main() {
 			os.Exit(1)
 		}
 		for i := range events {
-			str := format_event(&events[i])
-			fmt.Println(str)
+			processStroke(&events[i])
+			
 		}
 	}
 }
